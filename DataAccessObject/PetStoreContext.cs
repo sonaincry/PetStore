@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using BusinessObject.Models;
+
 namespace DataAccessObject;
 
 public partial class PetStoreContext : DbContext
@@ -124,6 +125,7 @@ public partial class PetStoreContext : DbContext
             entity.ToTable("Order");
 
             entity.Property(e => e.OrderId).HasColumnName("orderId");
+            entity.Property(e => e.Date).HasColumnType("datetime");
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
             entity.Property(e => e.Total)
                 .HasColumnType("decimal(18, 0)")

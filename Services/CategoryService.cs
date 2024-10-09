@@ -1,4 +1,5 @@
-﻿using BusinessObject.Models;
+﻿using AutoMapper;
+using BusinessObject.Models;
 using BusinessObject.Models.DTO;
 using Repositories;
 using System.Collections.Generic;
@@ -9,19 +10,17 @@ namespace Services
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _repository;
+        private readonly IMapper _mapper;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
         {
             _repository = categoryRepository;
+            _mapper = mapper;
         }
 
         public async Task<Category> AddCategoryAsync(CategoryDTO categoryDTO)
         {
-            var category = new Category
-            {
-                CategoryName = categoryDTO.CategoryName,
-                IsDeleted = false
-            };
+            var category = _mapper.Map<Category>(categoryDTO);
             return await _repository.AddCategoryAsync(category);
         }
 
@@ -33,11 +32,7 @@ namespace Services
 
         public async Task<Category> UpdateCategoryAsync(int id, CategoryDTO categoryDTO)
         {
-            var category = new Category
-            {
-                CategoryId = id,
-                CategoryName = categoryDTO.CategoryName,
-            };
+            var category = _mapper.Map<Category>(categoryDTO);
             return await _repository.UpdateCategoryAsync(id, category);
         }
     }

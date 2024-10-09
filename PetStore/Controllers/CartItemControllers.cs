@@ -39,8 +39,15 @@ namespace Controllers
         [HttpPost]
         public async Task<ActionResult<CartItem>> AddCartItem([FromBody] CartItemCreateDTO cartItemCreateDTO)
         {
-            var cartItem = await _cartItemService.AddCartItemAsync(cartItemCreateDTO);
-            return CreatedAtAction(nameof(GetCartItems), new { cartId = cartItem.CartId }, cartItem);
+            try
+            {
+                var cartItem = await _cartItemService.AddCartItemAsync(cartItemCreateDTO);
+                return CreatedAtAction(nameof(GetCartItems), new { cartId = cartItem.CartId }, cartItem);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message); 
+            }
         }
 
         [HttpPut("{cartItemId}")]
@@ -77,3 +84,4 @@ namespace Controllers
         }
     }
 }
+
