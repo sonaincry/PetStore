@@ -27,6 +27,7 @@ namespace Services
             CreateMap<OrderDTO, Order>().ReverseMap();
             CreateMap<OrderItemCreateDTO, OrderItem>().ReverseMap();
             CreateMap<OrderItemUpdateDTO, OrderItem>().ReverseMap();
+            CreateMap<PaymentDetailDTO, PaymentDetail>().ReverseMap();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using BusinessObject.Models;
+﻿using BusinessObject.DTOs;
+using BusinessObject.Models;
 using DataAccessObject;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,9 +20,9 @@ namespace Repositories
 
         public async Task<List<Order>> GetOrdersByUserIdAsync(int userId) => await OrderDAO.Instance.GetOrdersByUserIdAsync(userId);
 
-        public async Task<Order> CreateOrderFromProductAsync(int userId, int productId, int quantity)=> await OrderDAO.Instance.CreateOrderFromProductAsync(userId, productId, quantity);
+        public async Task<Order> CreateOrderFromProductAsync(int userId, int productId, int quantity) => await OrderDAO.Instance.CreateOrderFromProductAsync(userId, productId, quantity);
 
-        public async Task<Order> CreateOrderFromCartAsync(int cartId)=> await OrderDAO.Instance.CreateOrderFromCartAsync(cartId);
+        public async Task<Order> CreateOrderFromCartAsync(int cartId) => await OrderDAO.Instance.CreateOrderFromCartAsync(cartId);
 
     }
 }

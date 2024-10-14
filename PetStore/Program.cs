@@ -47,6 +47,8 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
 builder.Services.AddScoped<IOrderItemService, OrderItemService>();
+builder.Services.AddScoped<IPaymentDetailRepository, PaymentDetailRepository>();
+builder.Services.AddScoped<IPaymentDetailService, PaymentDetailService>();
 // Build the app
 var app = builder.Build();
 

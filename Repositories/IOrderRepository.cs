@@ -1,4 +1,5 @@
-﻿using BusinessObject.Models;
+﻿using BusinessObject.DTOs;
+using BusinessObject.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

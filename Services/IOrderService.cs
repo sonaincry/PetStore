@@ -1,9 +1,7 @@
-﻿using BusinessObject.Models;
+﻿using BusinessObject.DTOs;
+using BusinessObject.Models;
 using BusinessObject.Models.DTO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Services
@@ -15,8 +13,8 @@ namespace Services
         Task<Order> AddOrderAsync(OrderDTO orderDTO);
         Task<Order> UpdateOrderAsync(int id, OrderDTO orderDTO);
         Task<bool> SoftDeleteOrderAsync(int id);
-
         Task<List<Order>> GetOrdersByUserIdAsync(int userId);
+
         Task<Order> CreateOrderFromProductAsync(int userId, int productId, int quantity);
         Task<Order> CreateOrderFromCartAsync(int cartId);
     }

@@ -18,11 +18,6 @@ namespace Controllers
             _cartService = cartService;
         }
 
-        /// <summary>
-        /// Add or update a cart.
-        /// </summary>
-        /// <param name="cartDTO">The cart data transfer object.</param>
-        /// <returns>The created or updated cart.</returns>
         [HttpPost]
         public async Task<IActionResult> AddOrUpdateCart([FromBody] CartDTO cartDTO)
         {
@@ -35,11 +30,6 @@ namespace Controllers
             return CreatedAtAction(nameof(GetCart), new { userId = cartDTO.UserId }, cart);
         }
 
-        /// <summary>
-        /// Get the cart for a specified user.
-        /// </summary>
-        /// <param name="userId">The user ID.</param>
-        /// <returns>The user's cart.</returns>
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetCart(int userId)
         {
@@ -51,11 +41,6 @@ namespace Controllers
             return Ok(cart);
         }
 
-        /// <summary>
-        /// Remove a cart by its ID.
-        /// </summary>
-        /// <param name="cartId">The cart ID.</param>
-        /// <returns>A success or failure response.</returns>
         [HttpDelete("{cartId}")]
         public async Task<IActionResult> RemoveCart(int cartId)
         {
@@ -64,13 +49,9 @@ namespace Controllers
             {
                 return NotFound($"Cart with ID {cartId} not found.");
             }
-            return NoContent(); // 204 No Content
+            return NoContent(); 
         }
 
-        /// <summary>
-        /// Get all carts.
-        /// </summary>
-        /// <returns>A list of all carts.</returns>
         [HttpGet]
         public async Task<IActionResult> GetAllCarts()
         {

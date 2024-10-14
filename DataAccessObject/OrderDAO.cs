@@ -1,4 +1,5 @@
-﻿using BusinessObject.Models;
+﻿using BusinessObject.DTOs;
+using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
@@ -90,11 +91,15 @@ namespace DataAccessObject
                 throw new Exception("Product not found.");
             }
 
+
+            decimal totalAmount = product.Price * quantity;
+
             var order = new Order
             {
                 UserId = userId,
                 Date = DateTime.Now,
-                IsDeleted = false
+                IsDeleted = false,
+                Total = totalAmount 
             };
 
             await AddOrderAsync(order);
@@ -108,16 +113,28 @@ namespace DataAccessObject
             };
 
             await dbContext.OrderItems.AddAsync(orderItem);
+
+            var paymentDetail = new PaymentDetail
+            {
+                OrderId = order.OrderId,
+                Amount = totalAmount,
+                PaymentMethod = "pay when receive",
+                PaymentStatus = "Pending"
+            };
+
+            await dbContext.PaymentDetails.AddAsync(paymentDetail); 
+
             await dbContext.SaveChangesAsync();
 
             return order;
         }
 
+
         public async Task<Order> CreateOrderFromCartAsync(int cartId)
         {
             var cart = await dbContext.Carts
                                        .Include(c => c.CartItems)
-                                       .ThenInclude(ci => ci.Product) 
+                                       .ThenInclude(ci => ci.Product)
                                        .FirstOrDefaultAsync(c => c.CartId == cartId && !c.IsDeleted);
 
             if (cart == null)
@@ -131,7 +148,7 @@ namespace DataAccessObject
                 var product = await dbContext.Products.FindAsync(item.ProductId);
                 if (product != null)
                 {
-                    total += product.Price * item.Quantity; 
+                    total += product.Price * item.Quantity;
                 }
             }
 
@@ -140,7 +157,7 @@ namespace DataAccessObject
                 UserId = cart.UserId,
                 Date = DateTime.Now,
                 IsDeleted = false,
-                Total = total 
+                Total = total
             };
 
             await AddOrderAsync(order);
@@ -160,6 +177,17 @@ namespace DataAccessObject
 
             await dbContext.SaveChangesAsync();
 
+
+            var paymentDetail = new PaymentDetail
+            {
+                OrderId = order.OrderId,
+                Amount = total,
+                PaymentMethod = "Pay when receive", 
+                PaymentStatus = "Pending" 
+            };
+
+            await PaymentDetailDAO.Instance.AddPaymentDetailAsync(paymentDetail);
+
             var cartItemDAO = CartItemDAO.Instance;
             await cartItemDAO.ClearCartAsync(cartId);
 
@@ -167,5 +195,5 @@ namespace DataAccessObject
         }
 
     }
-}
 
+}

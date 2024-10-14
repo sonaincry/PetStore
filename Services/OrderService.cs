@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BusinessObject.DTOs;
 using BusinessObject.Models;
 using BusinessObject.Models.DTO;
 using Repositories;
@@ -24,8 +25,7 @@ namespace Services
 
         public async Task<Order> AddOrderAsync(OrderDTO orderDTO)
         {
-            var newOrder = _mapper.Map<Order>(orderDTO); 
-
+            var newOrder = _mapper.Map<Order>(orderDTO);
             return await _orderRepository.AddOrderAsync(newOrder);
         }
 
@@ -35,7 +35,6 @@ namespace Services
             if (existingOrder != null)
             {
                 _mapper.Map(orderDTO, existingOrder);
-
                 return await _orderRepository.UpdateOrderAsync(id, existingOrder);
             }
 
