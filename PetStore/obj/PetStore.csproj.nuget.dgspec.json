@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\PetStore\\PetStore.csproj": {}
+    "D:\\Project\\PetStore\\PetStore\\PetStore.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\BusinessObject\\BusinessObject.csproj": {
+    "D:\\Project\\PetStore\\BusinessObject\\BusinessObject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\BusinessObject\\BusinessObject.csproj",
+        "projectUniqueName": "D:\\Project\\PetStore\\BusinessObject\\BusinessObject.csproj",
         "projectName": "BusinessObject",
-        "projectPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\BusinessObject\\BusinessObject.csproj",
-        "packagesPath": "C:\\Users\\Son\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\BusinessObject\\obj\\",
+        "projectPath": "D:\\Project\\PetStore\\BusinessObject\\BusinessObject.csproj",
+        "packagesPath": "C:\\Users\\tekat\\.nuget\\packages\\",
+        "outputPath": "D:\\Project\\PetStore\\BusinessObject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Son\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tekat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -34,6 +35,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -81,21 +87,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\DataAccessObject\\DataAccessObject.csproj": {
+    "D:\\Project\\PetStore\\DataAccessObject\\DataAccessObject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\DataAccessObject\\DataAccessObject.csproj",
+        "projectUniqueName": "D:\\Project\\PetStore\\DataAccessObject\\DataAccessObject.csproj",
         "projectName": "DataAccessObject",
-        "projectPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\DataAccessObject\\DataAccessObject.csproj",
-        "packagesPath": "C:\\Users\\Son\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\DataAccessObject\\obj\\",
+        "projectPath": "D:\\Project\\PetStore\\DataAccessObject\\DataAccessObject.csproj",
+        "packagesPath": "C:\\Users\\tekat\\.nuget\\packages\\",
+        "outputPath": "D:\\Project\\PetStore\\DataAccessObject\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Son\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tekat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -103,14 +109,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\BusinessObject\\BusinessObject.csproj": {
-                "projectPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\BusinessObject\\BusinessObject.csproj"
+              "D:\\Project\\PetStore\\BusinessObject\\BusinessObject.csproj": {
+                "projectPath": "D:\\Project\\PetStore\\BusinessObject\\BusinessObject.csproj"
               }
             }
           }
@@ -119,6 +126,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -140,21 +152,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\PetStore\\PetStore.csproj": {
+    "D:\\Project\\PetStore\\PetStore\\PetStore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\PetStore\\PetStore.csproj",
+        "projectUniqueName": "D:\\Project\\PetStore\\PetStore\\PetStore.csproj",
         "projectName": "PetStore",
-        "projectPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\PetStore\\PetStore.csproj",
-        "packagesPath": "C:\\Users\\Son\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\PetStore\\obj\\",
+        "projectPath": "D:\\Project\\PetStore\\PetStore\\PetStore.csproj",
+        "packagesPath": "C:\\Users\\tekat\\.nuget\\packages\\",
+        "outputPath": "D:\\Project\\PetStore\\PetStore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Son\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tekat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -162,14 +174,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Services\\Services.csproj": {
-                "projectPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Services\\Services.csproj"
+              "D:\\Project\\PetStore\\Services\\Services.csproj": {
+                "projectPath": "D:\\Project\\PetStore\\Services\\Services.csproj"
               }
             }
           }
@@ -178,6 +191,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -220,21 +238,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Repositories\\Repositories.csproj": {
+    "D:\\Project\\PetStore\\Repositories\\Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Repositories\\Repositories.csproj",
+        "projectUniqueName": "D:\\Project\\PetStore\\Repositories\\Repositories.csproj",
         "projectName": "Repositories",
-        "projectPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Repositories\\Repositories.csproj",
-        "packagesPath": "C:\\Users\\Son\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Repositories\\obj\\",
+        "projectPath": "D:\\Project\\PetStore\\Repositories\\Repositories.csproj",
+        "packagesPath": "C:\\Users\\tekat\\.nuget\\packages\\",
+        "outputPath": "D:\\Project\\PetStore\\Repositories\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Son\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tekat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -242,14 +260,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\DataAccessObject\\DataAccessObject.csproj": {
-                "projectPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\DataAccessObject\\DataAccessObject.csproj"
+              "D:\\Project\\PetStore\\DataAccessObject\\DataAccessObject.csproj": {
+                "projectPath": "D:\\Project\\PetStore\\DataAccessObject\\DataAccessObject.csproj"
               }
             }
           }
@@ -258,6 +277,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -279,21 +303,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Services\\Services.csproj": {
+    "D:\\Project\\PetStore\\Services\\Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Services\\Services.csproj",
+        "projectUniqueName": "D:\\Project\\PetStore\\Services\\Services.csproj",
         "projectName": "Services",
-        "projectPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Services\\Services.csproj",
-        "packagesPath": "C:\\Users\\Son\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Services\\obj\\",
+        "projectPath": "D:\\Project\\PetStore\\Services\\Services.csproj",
+        "packagesPath": "C:\\Users\\tekat\\.nuget\\packages\\",
+        "outputPath": "D:\\Project\\PetStore\\Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Son\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tekat\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -301,14 +325,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Repositories\\Repositories.csproj": {
-                "projectPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Repositories\\Repositories.csproj"
+              "D:\\Project\\PetStore\\Repositories\\Repositories.csproj": {
+                "projectPath": "D:\\Project\\PetStore\\Repositories\\Repositories.csproj"
               }
             }
           }
@@ -317,6 +342,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -344,7 +374,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
