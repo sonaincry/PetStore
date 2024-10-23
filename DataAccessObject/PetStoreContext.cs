@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using BusinessObject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-
+using BusinessObject.Models;
 namespace DataAccessObject;
 
 public partial class PetStoreContext : DbContext
@@ -45,6 +44,7 @@ public partial class PetStoreContext : DbContext
         IConfiguration configuration = builder.Build();
         return configuration.GetConnectionString("DefaultConnection");
     }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Cart>(entity =>
@@ -200,6 +200,9 @@ public partial class PetStoreContext : DbContext
                 .HasMaxLength(255)
                 .HasColumnName("description");
             entity.Property(e => e.DiscountId).HasColumnName("discountId");
+            entity.Property(e => e.ImgUrl)
+                .HasMaxLength(255)
+                .HasColumnName("imgUrl");
             entity.Property(e => e.IsDeleted).HasColumnName("isDeleted");
             entity.Property(e => e.Price)
                 .HasColumnType("decimal(18, 0)")
