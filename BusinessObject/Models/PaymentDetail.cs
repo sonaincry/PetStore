@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace BusinessObject.Models;
 
@@ -18,6 +17,5 @@ public partial class PaymentDetail
 
     public bool IsDeleted { get; set; }
 
-    [JsonIgnore]
     public virtual Order? Order { get; set; }
 }
