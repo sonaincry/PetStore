@@ -49,7 +49,6 @@ namespace DataAccessObject
                 throw new ArgumentException("The product is not available.");
             }
 
-            // Check available stock
             if (quantity > productExists.Quantity) 
             {
                 throw new ArgumentException($"Product quantity exceeds available stock. Only {productExists.Quantity} available.");
@@ -60,7 +59,6 @@ namespace DataAccessObject
 
             if (existingCartItem != null)
             {
-                // Check total quantity after adding
                 if (existingCartItem.Quantity + quantity > productExists.Quantity)
                 {
                     throw new ArgumentException($"Total quantity exceeds available stock. Only {productExists.Quantity} available.");
@@ -95,26 +93,33 @@ namespace DataAccessObject
 
         public async Task<bool> UpdateCartItemAsync(int cartItemId, int quantity)
         {
-            var existingCartItem = await dbContext.CartItems
+            try
+            {
+                var existingCartItem = await dbContext.CartItems
                 .FirstOrDefaultAsync(ci => ci.CartItemId == cartItemId && !ci.IsDeleted);
-            if (existingCartItem == null)
-            {
-                return false;
-            }
+                if (existingCartItem == null)
+                {
+                    return false;
+                }
 
-            var productExists = await dbContext.Products.FindAsync(existingCartItem.ProductId);
-            if (productExists == null)
-            {
-                throw new ArgumentException("The product is not available.");
-            }
-            if (quantity > productExists.Quantity)
-            {
-                throw new ArgumentException($"Product quantity exceeds available stock. Only {productExists.Quantity} available.");
-            }
+                var productExists = await dbContext.Products.FindAsync(existingCartItem.ProductId);
+                if (productExists == null)
+                {
+                    throw new ArgumentException("The product is not available.");
+                }
+                if (quantity > productExists.Quantity)
+                {
+                    throw new ArgumentException($"Product quantity exceeds available stock. Only {productExists.Quantity} available.");
+                }
 
-            existingCartItem.Quantity = quantity;
-            await dbContext.SaveChangesAsync();
-            return true;
+                existingCartItem.Quantity = quantity;
+                await dbContext.SaveChangesAsync();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message, ex);
+            }
         }
 
         public async Task<List<CartItem>> GetCartItemByUserId(int userId)

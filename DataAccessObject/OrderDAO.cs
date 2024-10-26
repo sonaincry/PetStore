@@ -85,113 +85,127 @@ namespace DataAccessObject
         }
         public async Task<Order> CreateOrderFromProductAsync(int userId, int productId, int quantity)
         {
-            var product = await dbContext.Products.FindAsync(productId);
-            if (product == null)
+            try
             {
-                throw new Exception("Product not found.");
+                var product = await dbContext.Products.FindAsync(productId);
+                if (product == null)
+                {
+                    throw new Exception("Product not found.");
+                }
+
+
+                decimal totalAmount = product.Price * quantity;
+
+                var order = new Order
+                {
+                    UserId = userId,
+                    Date = DateTime.Now,
+                    IsDeleted = false,
+                    Total = totalAmount
+                };
+
+                await AddOrderAsync(order);
+
+                var orderItem = new OrderItem
+                {
+                    OrderId = order.OrderId,
+                    ProductId = productId,
+                    Quantity = quantity,
+                    IsDeleted = false
+                };
+
+                await dbContext.OrderItems.AddAsync(orderItem);
+
+                var paymentDetail = new PaymentDetail
+                {
+                    OrderId = order.OrderId,
+                    Amount = totalAmount,
+                    PaymentMethod = "pay when receive",
+                    PaymentStatus = "Pending"
+                };
+
+                await dbContext.PaymentDetails.AddAsync(paymentDetail);
+
+                await dbContext.SaveChangesAsync();
+
+                return order;
             }
-
-
-            decimal totalAmount = product.Price * quantity;
-
-            var order = new Order
+            catch(Exception ex)
             {
-                UserId = userId,
-                Date = DateTime.Now,
-                IsDeleted = false,
-                Total = totalAmount 
-            };
-
-            await AddOrderAsync(order);
-
-            var orderItem = new OrderItem
-            {
-                OrderId = order.OrderId,
-                ProductId = productId,
-                Quantity = quantity,
-                IsDeleted = false
-            };
-
-            await dbContext.OrderItems.AddAsync(orderItem);
-
-            var paymentDetail = new PaymentDetail
-            {
-                OrderId = order.OrderId,
-                Amount = totalAmount,
-                PaymentMethod = "pay when receive",
-                PaymentStatus = "Pending"
-            };
-
-            await dbContext.PaymentDetails.AddAsync(paymentDetail); 
-
-            await dbContext.SaveChangesAsync();
-
-            return order;
+                throw new Exception(ex.Message, ex);
+            }
         }
 
 
         public async Task<Order> CreateOrderFromCartAsync(int cartId)
         {
-            var cart = await dbContext.Carts
+            try
+            {
+                var cart = await dbContext.Carts
                                        .Include(c => c.CartItems)
                                        .ThenInclude(ci => ci.Product)
                                        .FirstOrDefaultAsync(c => c.CartId == cartId && !c.IsDeleted);
 
-            if (cart == null)
-            {
-                throw new Exception("Cart not found.");
-            }
-
-            decimal total = 0;
-            foreach (var item in cart.CartItems)
-            {
-                var product = await dbContext.Products.FindAsync(item.ProductId);
-                if (product != null)
+                if (cart == null)
                 {
-                    total += product.Price * item.Quantity;
+                    throw new Exception("Cart not found.");
                 }
-            }
 
-            var order = new Order
-            {
-                UserId = cart.UserId,
-                Date = DateTime.Now,
-                IsDeleted = false,
-                Total = total
-            };
-
-            await AddOrderAsync(order);
-
-            foreach (var item in cart.CartItems)
-            {
-                var orderItem = new OrderItem
+                decimal total = 0;
+                foreach (var item in cart.CartItems)
                 {
-                    OrderId = order.OrderId,
-                    ProductId = item.ProductId,
-                    Quantity = item.Quantity,
-                    IsDeleted = false
+                    var product = await dbContext.Products.FindAsync(item.ProductId);
+                    if (product != null)
+                    {
+                        total += product.Price * item.Quantity;
+                    }
+                }
+
+                var order = new Order
+                {
+                    UserId = cart.UserId,
+                    Date = DateTime.Now,
+                    IsDeleted = false,
+                    Total = total
                 };
 
-                await dbContext.OrderItems.AddAsync(orderItem);
+                await AddOrderAsync(order);
+
+                foreach (var item in cart.CartItems)
+                {
+                    var orderItem = new OrderItem
+                    {
+                        OrderId = order.OrderId,
+                        ProductId = item.ProductId,
+                        Quantity = item.Quantity,
+                        IsDeleted = false
+                    };
+
+                    await dbContext.OrderItems.AddAsync(orderItem);
+                }
+
+                await dbContext.SaveChangesAsync();
+
+
+                var paymentDetail = new PaymentDetail
+                {
+                    OrderId = order.OrderId,
+                    Amount = total,
+                    PaymentMethod = "Pay when receive",
+                    PaymentStatus = "Pending"
+                };
+
+                await PaymentDetailDAO.Instance.AddPaymentDetailAsync(paymentDetail);
+
+                var cartItemDAO = CartItemDAO.Instance;
+                await cartItemDAO.ClearCartAsync(cartId);
+
+                return order;
             }
-
-            await dbContext.SaveChangesAsync();
-
-
-            var paymentDetail = new PaymentDetail
+            catch(Exception ex)
             {
-                OrderId = order.OrderId,
-                Amount = total,
-                PaymentMethod = "Pay when receive", 
-                PaymentStatus = "Pending" 
-            };
-
-            await PaymentDetailDAO.Instance.AddPaymentDetailAsync(paymentDetail);
-
-            var cartItemDAO = CartItemDAO.Instance;
-            await cartItemDAO.ClearCartAsync(cartId);
-
-            return order;
+                throw new Exception(ex.Message, ex);
+            }
         }
 
     }

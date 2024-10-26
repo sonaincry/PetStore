@@ -35,33 +35,68 @@ namespace DataAccessObject
 
         public async Task<User> AddUserAsync(User user)
         {
-            await dbContext.Users.AddAsync(user);
-            await dbContext.SaveChangesAsync();
-            return user;
+            try
+            {
+                if (dbContext.Users.Any(u => u.Email == user.Email))
+                {
+                    throw new Exception("A user with this email already exists.");
+                }
+                await dbContext.Users.AddAsync(user);
+                await dbContext.SaveChangesAsync();
+                return user;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while adding the user.", ex);
+            }
         }
 
         public async Task<User> UpdateUserAsync(int id, User user)
         {
-            var existUser = await dbContext.Users.FirstOrDefaultAsync(u => u.UserId == id);
-            if (existUser != null)
+            try
             {
-                existUser.FullName = user.FullName ?? existUser.FullName;
-                existUser.Address = user.Address ?? existUser.Address;
-                existUser.Phone = user.Phone ?? existUser.Phone;
-                await dbContext.SaveChangesAsync();
-                return existUser;
+                var existUser = await dbContext.Users.FirstOrDefaultAsync(u => u.UserId == id);
+                if (existUser != null)
+                {
+                    existUser.FullName = user.FullName ?? existUser.FullName;
+                    existUser.Address = user.Address ?? existUser.Address;
+                    existUser.Phone = user.Phone ?? existUser.Phone;
+                    await dbContext.SaveChangesAsync();
+                    return existUser;
+                }
+                return null;
             }
-            return null;
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while adding the user.", ex);
+            }
+
         }
 
         public async Task<User> GetUserByIdAsync(int id)
         {
-            return await dbContext.Users.FirstOrDefaultAsync(x => x.UserId.Equals(id));
+            try
+            {
+                return await dbContext.Users.FirstOrDefaultAsync(x => x.UserId.Equals(id));
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while adding the user.", ex);
+            }
         }
 
         public async Task<User> LoginAsync(string username, string password)
         {
-            return await dbContext.Users.FirstOrDefaultAsync(x => x.UserName.Equals(username) && x.Password.Equals(password));
+            try
+            {
+                return await dbContext.Users.FirstOrDefaultAsync(x => x.UserName.Equals(username) && x.Password.Equals(password));
+            }
+            
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while adding the user.", ex);
+            }
         }
     }
 }
