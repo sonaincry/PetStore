@@ -50,27 +50,46 @@ namespace DataAccessObject
 
         public async Task<Product> AddProductAsync(Product product)
         {
-            await dbContext.Products.AddAsync(product);
-            await dbContext.SaveChangesAsync();
-            return product;
+            try
+            {
+                if (dbContext.Products.Any(u => u.ProductName == u.ProductName))
+                {
+                    throw new Exception("This product already exist.");
+                }
+                await dbContext.Products.AddAsync(product);
+                await dbContext.SaveChangesAsync();
+                return product;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while adding the product.", ex);
+            }
         }
 
         public async Task<Product> UpdateProductAsync(int id, Product product)
         {
-            var existProduct = await dbContext.Products.FirstOrDefaultAsync(p => p.ProductId == id && !p.IsDeleted);
-            if (existProduct != null)
+            try
             {
-                existProduct.ProductName = product.ProductName ?? existProduct.ProductName;
-                existProduct.Description = product.Description ?? existProduct.Description;
-                existProduct.Price = product.Price > 0 ? product.Price : existProduct.Price;
-                existProduct.Quantity = product.Quantity >= 0 ? product.Quantity : existProduct.Quantity;
-                existProduct.DiscountId = product.DiscountId ?? existProduct.DiscountId;
-                existProduct.CategoryId = product.CategoryId ?? existProduct.CategoryId;
+                var existProduct = await dbContext.Products.FirstOrDefaultAsync(p => p.ProductId == id && !p.IsDeleted);
+                if (existProduct != null)
+                {
+                    existProduct.ProductName = product.ProductName ?? existProduct.ProductName;
+                    existProduct.Description = product.Description ?? existProduct.Description;
+                    existProduct.Price = product.Price > 0 ? product.Price : existProduct.Price;
+                    existProduct.Quantity = product.Quantity >= 0 ? product.Quantity : existProduct.Quantity;
+                    existProduct.DiscountId = product.DiscountId ?? existProduct.DiscountId;
+                    existProduct.CategoryId = product.CategoryId ?? existProduct.CategoryId;
 
-                await dbContext.SaveChangesAsync();
-                return existProduct;
+                    await dbContext.SaveChangesAsync();
+                    return existProduct;
+                }
+                return null;
             }
-            return null;
+
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while adding the product.", ex);
+            }
         }
 
         public async Task<bool> SoftDeleteProductAsync(int id)
