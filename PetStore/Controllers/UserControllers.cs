@@ -43,13 +43,22 @@ namespace PetStore.Controllers
         [HttpPost]
         public async Task<ActionResult> AddUser([FromBody] UserCreateDTO userCreateDTO)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var newUser = await _userService.AddUserAsync(userCreateDTO);
+                return CreatedAtAction(nameof(GetUserById), new { id = newUser.UserId }, newUser);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(ex.Message);
             }
 
-            var newUser = await _userService.AddUserAsync(userCreateDTO);
-            return CreatedAtAction(nameof(GetUserById), new { id = newUser.UserId }, newUser);
         }
 
         [HttpPut("{id}")]

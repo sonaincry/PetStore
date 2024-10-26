@@ -35,6 +35,7 @@ namespace DataAccessObject
 
         public async Task<User> AddUserAsync(User user)
         {
+<<<<<<< Updated upstream
             try
             {
                 if (dbContext.Users.Any(u => u.Email == user.Email))
@@ -49,6 +50,11 @@ namespace DataAccessObject
             {
                 throw new Exception("An error occurred while adding the user.", ex);
             }
+=======
+            dbContext.Users.Add(user);
+            await dbContext.SaveChangesAsync();
+            return user;
+>>>>>>> Stashed changes
         }
 
         public async Task<User> UpdateUserAsync(int id, User user)

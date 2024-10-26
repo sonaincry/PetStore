@@ -18,8 +18,12 @@ builder.Services.AddCors(options =>
     {
         policyBuilder.AllowAnyOrigin()
                      .AllowAnyHeader()
+<<<<<<< Updated upstream
                      .AllowAnyMethod() 
                      .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+=======
+                     .AllowAnyMethod();
+>>>>>>> Stashed changes
     });
 });
 
