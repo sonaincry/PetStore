@@ -2997,19 +2997,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Son\\.nuget\\packages\\": {}
+    "C:\\Users\\tekat\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Repositories\\Repositories.csproj",
+      "projectUniqueName": "D:\\Project\\PetStore\\Repositories\\Repositories.csproj",
       "projectName": "Repositories",
-      "projectPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Repositories\\Repositories.csproj",
-      "packagesPath": "C:\\Users\\Son\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\Repositories\\obj\\",
+      "projectPath": "D:\\Project\\PetStore\\Repositories\\Repositories.csproj",
+      "packagesPath": "C:\\Users\\tekat\\.nuget\\packages\\",
+      "outputPath": "D:\\Project\\PetStore\\Repositories\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Son\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tekat\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3017,14 +3017,15 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\DataAccessObject\\DataAccessObject.csproj": {
-              "projectPath": "C:\\Users\\Son\\Desktop\\C#\\PetStoreAPI\\DataAccessObject\\DataAccessObject.csproj"
+            "D:\\Project\\PetStore\\DataAccessObject\\DataAccessObject.csproj": {
+              "projectPath": "D:\\Project\\PetStore\\DataAccessObject\\DataAccessObject.csproj"
             }
           }
         }
@@ -3033,6 +3034,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3054,7 +3060,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }
