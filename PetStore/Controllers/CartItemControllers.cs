@@ -18,7 +18,7 @@ namespace Controllers
             _cartItemService = cartItemService;
         }
 
-        [HttpGet("{userId}")]
+        /*[HttpGet("{userId}")]
         public async Task<ActionResult<List<CartItem>>> GetCart(int userId)
         {
             var cart = await _cartItemService.GetCartItemByUserId(userId);
@@ -27,7 +27,7 @@ namespace Controllers
                 return NotFound();
             }
             return Ok(cart);
-        }
+        }*/
 
         [HttpGet("items/{cartId}")]
         public async Task<ActionResult<List<CartItem>>> GetCartItems(int cartId)
