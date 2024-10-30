@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace BusinessObject.Models;
 
@@ -24,9 +25,9 @@ public partial class Product
     public string? ImgUrl { get; set; }
 
     public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
-
+    [JsonIgnore]
     public virtual Category? Category { get; set; }
-
+    [JsonIgnore]
     public virtual Discount? Discount { get; set; }
 
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();

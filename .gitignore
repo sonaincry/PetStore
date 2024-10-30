@@ -2,3 +2,7 @@
 /.vs
 /.vs/PetStoreAPI
 /.vs/PetStoreAPI/DesignTimeBuild
+
+# Ignore build directories
+bin/
+obj/
