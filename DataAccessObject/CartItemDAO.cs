@@ -37,45 +37,70 @@ namespace DataAccessObject
 
         public async Task<CartItem> AddCartItemAsync(int cartId, int productId, int quantity)
         {
+            // Check if the cart exists
             var cartExists = await dbContext.Carts.FindAsync(cartId);
             if (cartExists == null)
             {
                 throw new ArgumentException("The cart does not exist.");
             }
 
+            // Check if the product exists
             var productExists = await dbContext.Products.FindAsync(productId);
             if (productExists == null)
             {
                 throw new ArgumentException("The product is not available.");
             }
 
-            if (quantity > productExists.Quantity) 
+            // Check if requested quantity is available in stock
+            if (quantity > productExists.Quantity)
             {
                 throw new ArgumentException($"Product quantity exceeds available stock. Only {productExists.Quantity} available.");
             }
 
+            // Check if there is an existing cart item for this product
             var existingCartItem = await dbContext.CartItems
-                .FirstOrDefaultAsync(ci => ci.CartId == cartId && ci.ProductId == productId && !ci.IsDeleted);
+                .FirstOrDefaultAsync(ci => ci.CartId == cartId && ci.ProductId == productId);
 
             if (existingCartItem != null)
             {
-                if (existingCartItem.Quantity + quantity > productExists.Quantity)
+                // Check if the existing item is marked as deleted
+                if (existingCartItem.IsDeleted)
                 {
-                    throw new ArgumentException($"Total quantity exceeds available stock. Only {productExists.Quantity} available.");
+                    // Restore the deleted item
+                    existingCartItem.IsDeleted = false;
+
+                    // Update the quantity of the restored item
+                    if (existingCartItem.Quantity + quantity > productExists.Quantity)
+                    {
+                        throw new ArgumentException($"Total quantity exceeds available stock. Only {productExists.Quantity} available.");
+                    }
+
+                    existingCartItem.Quantity += quantity; // Add the new quantity
+                }
+                else
+                {
+                    // If the item is not deleted, simply update the quantity
+                    if (existingCartItem.Quantity + quantity > productExists.Quantity)
+                    {
+                        throw new ArgumentException($"Total quantity exceeds available stock. Only {productExists.Quantity} available.");
+                    }
+
+                    existingCartItem.Quantity += quantity; // Add the new quantity
                 }
 
-                existingCartItem.Quantity += quantity;
+                // Save changes to the existing cart item
                 await dbContext.SaveChangesAsync();
                 return existingCartItem;
             }
             else
             {
+                // If no existing item, create a new cart item
                 var cartItem = new CartItem
                 {
                     CartId = cartId,
                     ProductId = productId,
                     Quantity = quantity,
-                    IsDeleted = false
+                    IsDeleted = false // Set as active when adding a new item
                 };
 
                 try
@@ -90,6 +115,7 @@ namespace DataAccessObject
                 }
             }
         }
+
 
         public async Task<bool> UpdateCartItemAsync(int cartItemId, int quantity)
         {
@@ -145,14 +171,15 @@ namespace DataAccessObject
         public async Task<bool> ClearCartAsync(int cartId)
         {
             var cartItems = await dbContext.CartItems
-                .Where(ci => ci.CartId == cartId && !ci.IsDeleted)
-                .ToListAsync();
-            foreach (var item in cartItems)
-            {
-                dbContext.CartItems.Remove(item);
-            }
-            await dbContext.SaveChangesAsync();
+                            .Where(ci => ci.CartId == cartId)
+                            .ToListAsync();
+
+            dbContext.CartItems.RemoveRange(cartItems); 
+
+            await dbContext.SaveChangesAsync(); 
             return true;
         }
+
+
     }
 }

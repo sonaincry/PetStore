@@ -142,9 +142,10 @@ namespace DataAccessObject
             try
             {
                 var cart = await dbContext.Carts
-                                       .Include(c => c.CartItems)
-                                       .ThenInclude(ci => ci.Product)
-                                       .FirstOrDefaultAsync(c => c.CartId == cartId && !c.IsDeleted);
+                                           .Include(c => c.CartItems)
+                                           .ThenInclude(ci => ci.Product)
+                                           .AsNoTracking()  
+                                           .FirstOrDefaultAsync(c => c.CartId == cartId && !c.IsDeleted);
 
                 if (cart == null)
                 {
@@ -186,7 +187,6 @@ namespace DataAccessObject
 
                 await dbContext.SaveChangesAsync();
 
-
                 var paymentDetail = new PaymentDetail
                 {
                     OrderId = order.OrderId,
@@ -200,13 +200,16 @@ namespace DataAccessObject
                 var cartItemDAO = CartItemDAO.Instance;
                 await cartItemDAO.ClearCartAsync(cartId);
 
+                cart.CartItems.Clear();
+
                 return order;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception(ex.Message, ex);
             }
         }
+
 
     }
 
